@@ -17,17 +17,22 @@ dependencies:
   # Inyección de dependencias
   get_it: ^7.6.4
 
-  # Manejo de permisos
-  permission_handler: ^11.0.1
+  # ── PLUGINS (reemplazan Platform Channels) ──────────────────
+  # Autenticación biométrica (reemplaza biometric_datasource manual)
+  local_auth: ^2.3.0
 
-  # Acelerómetro crudo - para detección de caídas
+  # GPS y ubicación (reemplaza gps_datasource con EventChannel/MethodChannel)
+  geolocator: ^13.0.2
+  permission_handler: ^11.3.1
+
+  # Acelerómetro y sensores (ya se usaba, ahora es la única fuente)
   sensors_plus: ^5.0.1
-
-  # Clasificación de actividad (caminar / correr / quieto)
-  activity_recognition_flutter: ^6.0.0
 
   # Síntesis de voz
   flutter_tts: ^4.0.2
+
+  # ── CRUD / Persistencia local ────────────────────────────────
+  shared_preferences: ^2.3.2
 
   cupertino_icons: ^1.0.8
 

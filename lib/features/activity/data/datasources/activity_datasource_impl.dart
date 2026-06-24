@@ -16,11 +16,11 @@ class ActivityDataSourceImpl {
   // Umbral de caída: 42.0 m/s²
   // Gravedad normal = 9.8. Un impacto real supera 20. 
   // 42.0 m/s² (~4.3G) da margen para detectar solo impactos reales de caídas y no movimientos de carrera.
-  static const double _fallThreshold = 42.0;
+  static const double _fallThreshold = 55.0;
 
   // Cooldown entre caídas: 2 segundos
   // Evita múltiples eventos del mismo impacto (rebote del dispositivo)
-  static const Duration _fallCooldown = Duration(seconds: 3);
+  static const Duration _fallCooldown = Duration(seconds: 4);
 
   DateTime? _lastFallTime;
 

@@ -10,6 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0F0F0F),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
@@ -19,61 +20,92 @@ class LoginPage extends StatelessWidget {
               SnackBar(
                 content: Text(state.message),
                 backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             );
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            return Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
-                ),
-              ),
-              child: SafeArea(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    // Logo
+                    Container(
+                      padding: const EdgeInsets.all(28),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1A1A1A),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: const Color(0xFFFF6B35).withOpacity(0.4),
+                          width: 2,
+                        ),
+                      ),
+                      child: const Icon(
                         Icons.fitness_center,
-                        size: 100,
+                        size: 64,
+                        color: Color(0xFFFF6B35),
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    const Text(
+                      'Fitness Tracker',
+                      style: TextStyle(
+                        fontSize: 34,
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        'Fitness Tracker',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Tu compañero de entrenamiento',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xFF6B6B6B),
                       ),
-                      const SizedBox(height: 48),
-
-                      if (state is AuthLoading)
-                        const CircularProgressIndicator(color: Colors.white)
-                      else
-                        ElevatedButton.icon(
+                    ),
+                    const Spacer(),
+                    // Botón
+                    if (state is AuthLoading)
+                      const CircularProgressIndicator(
+                        color: Color(0xFFFF6B35),
+                      )
+                    else
+                      SizedBox(
+                        width: double.infinity,
+                        height: 60,
+                        child: ElevatedButton.icon(
                           onPressed: () {
-                            context.read<AuthBloc>().add(AuthenticateRequested());
+                            context
+                                .read<AuthBloc>()
+                                .add(AuthenticateRequested());
                           },
-                          icon: const Icon(Icons.fingerprint),
-                          label: const Text('Autenticar con Huella'),
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 32,
-                              vertical: 16,
+                          icon: const Icon(Icons.fingerprint, size: 26),
+                          label: const Text(
+                            'Autenticar con Huella',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
                             ),
-                            backgroundColor: Colors.white,
-                            foregroundColor: const Color(0xFF6366F1),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFFF6B35),
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
                           ),
                         ),
-                    ],
-                  ),
+                      ),
+                    const SizedBox(height: 48),
+                  ],
                 ),
               ),
             );

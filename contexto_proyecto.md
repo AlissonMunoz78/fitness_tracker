@@ -8,11 +8,13 @@ Generado automáticamente por export_context_flutter.dart
 ## ACIERTOS
 
 ✅ Feature "activity" contiene data/domain/presentation.
+✅ Feature "activity_record" contiene data/domain/presentation.
 ✅ Feature "auth" contiene data/domain/presentation.
 
 
 # ESTRUCTURA DEL PROYECTO
 
+📄 .flutter-plugins-dependencies
 📄 .gitignore
 📄 .metadata
 📄 README.md
@@ -26,6 +28,11 @@ Generado automáticamente por export_context_flutter.dart
                 📄 AndroidManifest.xml
             📁 main
                 📄 AndroidManifest.xml
+                📁 java
+                    📁 io
+                        📁 flutter
+                            📁 plugins
+                                📄 GeneratedPluginRegistrant.java
                 📁 kotlin
                     📁 com
                         📁 tuinstituto
@@ -55,15 +62,24 @@ Generado automáticamente por export_context_flutter.dart
     📄 build.gradle.kts
     📁 gradle
         📁 wrapper
+            📄 gradle-wrapper.jar
             📄 gradle-wrapper.properties
     📄 gradle.properties
+    📄 gradlew
+    📄 gradlew.bat
+    📄 local.properties
     📄 settings.gradle.kts
 📁 ios
     📄 .gitignore
     📁 Flutter
         📄 AppFrameworkInfo.plist
         📄 Debug.xcconfig
+        📄 Generated.xcconfig
         📄 Release.xcconfig
+        📁 ephemeral
+            📄 flutter_lldb_helper.py
+            📄 flutter_lldbinit
+        📄 flutter_export_environment.sh
     📁 Runner
         📄 AppDelegate.swift
         📁 Assets.xcassets
@@ -93,6 +109,8 @@ Generado automáticamente por export_context_flutter.dart
         📁 Base.lproj
             📄 LaunchScreen.storyboard
             📄 Main.storyboard
+        📄 GeneratedPluginRegistrant.h
+        📄 GeneratedPluginRegistrant.m
         📄 Info.plist
         📄 Runner-Bridging-Header.h
         📄 SceneDelegate.swift
@@ -133,6 +151,18 @@ Generado automáticamente por export_context_flutter.dart
                     📄 activity_bloc.dart
                 📁 pages
                     📄 activity_page.dart
+        📁 activity_record
+            📁 data
+                📁 repositories
+                    📄 activity_record_repository.dart
+            📁 domain
+                📁 entities
+                    📄 activity_record.dart
+            📁 presentation
+                📁 bloc
+                    📄 activity_record_bloc.dart
+                📁 pages
+                    📄 history_page.dart
         📁 auth
             📁 data
                 📁 datasources
@@ -171,6 +201,13 @@ Generado automáticamente por export_context_flutter.dart
 
 
 # CONTENIDO DE LOS ARCHIVOS
+
+          
+================================================
+📄 ARCHIVO: .flutter-plugins-dependencies
+================================================
+
+{"info":"This is a generated file; do not edit or check into version control.","plugins":{"ios":[{"name":"flutter_tts","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\flutter_tts-4.2.5\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"geolocator_apple","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\geolocator_apple-2.3.14\\\\","shared_darwin_source":true,"native_build":true,"dependencies":[],"dev_dependency":false},{"name":"local_auth_darwin","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\local_auth_darwin-1.6.1\\\\","shared_darwin_source":true,"native_build":true,"dependencies":[],"dev_dependency":false},{"name":"permission_handler_apple","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\permission_handler_apple-9.4.10\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"sensors_plus","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\sensors_plus-5.0.1\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"shared_preferences_foundation","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\shared_preferences_foundation-2.5.6\\\\","shared_darwin_source":true,"native_build":true,"dependencies":[],"dev_dependency":false}],"android":[{"name":"flutter_plugin_android_lifecycle","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\flutter_plugin_android_lifecycle-2.0.35\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"flutter_tts","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\flutter_tts-4.2.5\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"geolocator_android","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\geolocator_android-4.6.2\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"local_auth_android","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\local_auth_android-1.0.56\\\\","native_build":true,"dependencies":["flutter_plugin_android_lifecycle"],"dev_dependency":false},{"name":"permission_handler_android","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\permission_handler_android-12.1.0\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"sensors_plus","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\sensors_plus-5.0.1\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"shared_preferences_android","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\shared_preferences_android-2.4.23\\\\","native_build":true,"dependencies":[],"dev_dependency":false}],"macos":[{"name":"flutter_tts","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\flutter_tts-4.2.5\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"geolocator_apple","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\geolocator_apple-2.3.14\\\\","shared_darwin_source":true,"native_build":true,"dependencies":[],"dev_dependency":false},{"name":"local_auth_darwin","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\local_auth_darwin-1.6.1\\\\","shared_darwin_source":true,"native_build":true,"dependencies":[],"dev_dependency":false},{"name":"shared_preferences_foundation","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\shared_preferences_foundation-2.5.6\\\\","shared_darwin_source":true,"native_build":true,"dependencies":[],"dev_dependency":false}],"linux":[{"name":"path_provider_linux","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\path_provider_linux-2.2.1\\\\","native_build":false,"dependencies":[],"dev_dependency":false},{"name":"shared_preferences_linux","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\shared_preferences_linux-2.4.1\\\\","native_build":false,"dependencies":["path_provider_linux"],"dev_dependency":false}],"windows":[{"name":"flutter_tts","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\flutter_tts-4.2.5\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"geolocator_windows","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\geolocator_windows-0.2.5\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"local_auth_windows","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\local_auth_windows-1.0.11\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"path_provider_windows","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\path_provider_windows-2.3.0\\\\","native_build":false,"dependencies":[],"dev_dependency":false},{"name":"permission_handler_windows","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\permission_handler_windows-0.2.1\\\\","native_build":true,"dependencies":[],"dev_dependency":false},{"name":"shared_preferences_windows","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\shared_preferences_windows-2.4.1\\\\","native_build":false,"dependencies":["path_provider_windows"],"dev_dependency":false}],"web":[{"name":"flutter_tts","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\flutter_tts-4.2.5\\\\","dependencies":[],"dev_dependency":false},{"name":"geolocator_web","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\geolocator_web-4.1.4\\\\","dependencies":[],"dev_dependency":false},{"name":"permission_handler_html","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\permission_handler_html-0.1.3+5\\\\","dependencies":[],"dev_dependency":false},{"name":"sensors_plus","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\sensors_plus-5.0.1\\\\","dependencies":[],"dev_dependency":false},{"name":"shared_preferences_web","path":"C:\\\\Users\\\\HP\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\shared_preferences_web-2.4.3\\\\","dependencies":[],"dev_dependency":false}]},"dependencyGraph":[{"name":"flutter_plugin_android_lifecycle","dependencies":[]},{"name":"flutter_tts","dependencies":[]},{"name":"geolocator","dependencies":["geolocator_android","geolocator_apple","geolocator_web","geolocator_windows"]},{"name":"geolocator_android","dependencies":[]},{"name":"geolocator_apple","dependencies":[]},{"name":"geolocator_web","dependencies":[]},{"name":"geolocator_windows","dependencies":[]},{"name":"local_auth","dependencies":["local_auth_android","local_auth_darwin","local_auth_windows"]},{"name":"local_auth_android","dependencies":["flutter_plugin_android_lifecycle"]},{"name":"local_auth_darwin","dependencies":[]},{"name":"local_auth_windows","dependencies":[]},{"name":"path_provider_linux","dependencies":[]},{"name":"path_provider_windows","dependencies":[]},{"name":"permission_handler","dependencies":["permission_handler_android","permission_handler_apple","permission_handler_html","permission_handler_windows"]},{"name":"permission_handler_android","dependencies":[]},{"name":"permission_handler_apple","dependencies":[]},{"name":"permission_handler_html","dependencies":[]},{"name":"permission_handler_windows","dependencies":[]},{"name":"sensors_plus","dependencies":[]},{"name":"shared_preferences","dependencies":["shared_preferences_android","shared_preferences_foundation","shared_preferences_linux","shared_preferences_web","shared_preferences_windows"]},{"name":"shared_preferences_android","dependencies":[]},{"name":"shared_preferences_foundation","dependencies":[]},{"name":"shared_preferences_linux","dependencies":["path_provider_linux"]},{"name":"shared_preferences_web","dependencies":[]},{"name":"shared_preferences_windows","dependencies":["path_provider_windows"]}],"date_created":"2026-06-23 20:13:40.749975","version":"3.41.9","swift_package_manager_enabled":{"ios":false,"macos":false}}
 
           
 ================================================
@@ -384,6 +421,27 @@ Runner/GeneratedPluginRegistrant.*
 ================================================
 
 #include "Generated.xcconfig"
+
+
+          
+================================================
+📄 ARCHIVO: ios\Flutter\Generated.xcconfig
+================================================
+
+// This is a generated file; do not edit or check into version control.
+FLUTTER_ROOT=C:\Universidad\2026\Moviles\flutter_windows_3.41.9-stable\flutter
+FLUTTER_APPLICATION_PATH=C:\Universidad\2026\Moviles\ProyectFlutter\Fittness-app-main
+COCOAPODS_PARALLEL_CODE_SIGN=true
+FLUTTER_TARGET=lib\main.dart
+FLUTTER_BUILD_DIR=build
+FLUTTER_BUILD_NAME=1.0.0
+FLUTTER_BUILD_NUMBER=1.0.0
+EXCLUDED_ARCHS[sdk=iphonesimulator*]=i386
+EXCLUDED_ARCHS[sdk=iphoneos*]=armv7
+DART_OBFUSCATION=false
+TRACK_WIDGET_CREATION=true
+TREE_SHAKE_ICONS=false
+PACKAGE_CONFIG=.dart_tool/package_config.json
 
 
           
@@ -604,11 +662,11 @@ class ActivityDataSourceImpl {
   // Umbral de caída: 42.0 m/s²
   // Gravedad normal = 9.8. Un impacto real supera 20. 
   // 42.0 m/s² (~4.3G) da margen para detectar solo impactos reales de caídas y no movimientos de carrera.
-  static const double _fallThreshold = 42.0;
+  static const double _fallThreshold = 55.0;
 
   // Cooldown entre caídas: 2 segundos
   // Evita múltiples eventos del mismo impacto (rebote del dispositivo)
-  static const Duration _fallCooldown = Duration(seconds: 3);
+  static const Duration _fallCooldown = Duration(seconds: 4);
 
   DateTime? _lastFallTime;
 
@@ -1049,7 +1107,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/activity_bloc.dart';
 import '../../domain/entities/activity_state.dart';
 import '../../data/datasources/activity_datasource_impl.dart';
-import '../../../../../injection_container.dart';
+import '../../../../injection_container.dart';
+import '../../../activity_record/data/repositories/activity_record_repository.dart';
+import '../../../activity_record/domain/entities/activity_record.dart';
+import '../../../auth/data/datasources/accelerometer_datasource.dart';
 
 class ActivityPage extends StatefulWidget {
   const ActivityPage({super.key});
@@ -1059,6 +1120,8 @@ class ActivityPage extends StatefulWidget {
 }
 
 class _ActivityPageState extends State<ActivityPage> {
+  DateTime? _sessionStart;
+  bool _hadFall = false;
 
   @override
   void initState() {
@@ -1073,21 +1136,64 @@ class _ActivityPageState extends State<ActivityPage> {
     if (!mounted) return;
 
     if (granted) {
+      setState(() {
+        _sessionStart = DateTime.now();
+        _hadFall = false;
+      });
       context.read<ActivityBloc>().add(ActivityStarted());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Permisos denegados. Ve a Ajustes > Permisos de la app y activa "Actividad física" y "Sensores corporales".',
-          ),
+        SnackBar(
+          content: const Text('Permisos denegados. Ve a Ajustes > Permisos.'),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 6),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       );
     }
   }
 
+  Future<void> _saveSessionRecord(ActivityBlocState currentState) async {
+    if (_sessionStart == null) return;
+
+    final accelerometer = sl<AccelerometerDataSource>();
+    int currentSteps = 0;
+    await accelerometer.stepStream.first.then((data) {
+      currentSteps = data.stepCount;
+    }).catchError((_) {});
+
+    String activityType = 'stationary';
+    if (currentState is ActivityTracking) {
+      switch (currentState.current.type) {
+        case UserActivityType.walking:
+          activityType = 'walking';
+          break;
+        case UserActivityType.running:
+          activityType = 'running';
+          break;
+        default:
+          activityType = 'stationary';
+      }
+    }
+
+    final record = ActivityRecord(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      activityType: activityType,
+      startedAt: _sessionStart!,
+      endedAt: DateTime.now(),
+      steps: currentSteps,
+      distanceKm: currentSteps * 0.0007,
+      calories: currentSteps * 0.04,
+      hadFallDetected: _hadFall,
+    );
+
+    await sl<ActivityRecordRepository>().saveRecord(record);
+  }
+
   void _showFallDialog(BuildContext context, FallAlert state) {
+    _hadFall = true;
     bool showSecondary = false;
     Timer? secondaryTimer;
 
@@ -1097,35 +1203,40 @@ class _ActivityPageState extends State<ActivityPage> {
       builder: (dialogContext) {
         return StatefulBuilder(
           builder: (ctx, setDialogState) {
-
             secondaryTimer ??= Timer(
               const Duration(seconds: 15),
-              () {
-                setDialogState(() {
-                  showSecondary = true;
-                });
-              },
+              () => setDialogState(() => showSecondary = true),
             );
 
             return AlertDialog(
+              backgroundColor: const Color(0xFF1A1A1A),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
               title: const Row(
                 children: [
                   Icon(Icons.warning_amber_rounded,
                       color: Colors.orange, size: 28),
                   SizedBox(width: 8),
-                  Text('¿Estás bien?'),
+                  Text(
+                    '¿Estás bien?',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ],
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Se detectó una posible caída.'),
-                  const SizedBox(height: 8),
-                  if (showSecondary)
+                  const Text(
+                    'Se detectó una posible caída.',
+                    style: TextStyle(color: Color(0xFF9E9E9E)),
+                  ),
+                  if (showSecondary) ...[
+                    const SizedBox(height: 12),
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.red.shade50,
+                        color: Colors.red.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.red),
                       ),
@@ -1137,6 +1248,7 @@ class _ActivityPageState extends State<ActivityPage> {
                         ),
                       ),
                     ),
+                  ],
                 ],
               ),
               actions: [
@@ -1146,12 +1258,18 @@ class _ActivityPageState extends State<ActivityPage> {
                     context.read<ActivityBloc>().add(FallConfirmed());
                     Navigator.pop(dialogContext);
                   },
-                  child: const Text('Estoy bien'),
+                  child: const Text(
+                    'Estoy bien',
+                    style: TextStyle(color: Color(0xFFFF6B35)),
+                  ),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onPressed: () {
                     secondaryTimer?.cancel();
@@ -1171,10 +1289,17 @@ class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0F0F0F),
       appBar: AppBar(
-        title: const Text('Detector de Actividad'),
-        backgroundColor: const Color(0xFF6366F1),
-        foregroundColor: Colors.white,
+        title: const Text(
+          'Detector de Actividad',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: const Color(0xFF1A1A1A),
+        elevation: 0,
       ),
       body: BlocListener<ActivityBloc, ActivityBlocState>(
         listener: (context, state) {
@@ -1184,49 +1309,141 @@ class _ActivityPageState extends State<ActivityPage> {
         },
         child: BlocBuilder<ActivityBloc, ActivityBlocState>(
           builder: (context, state) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    _getIcon(state),
-                    size: 100,
-                    color: const Color(0xFF6366F1),
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    _getLabel(state),
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
+            return Column(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 200,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: const Color(0xFFFF6B35).withOpacity(0.15),
+                              width: 2,
+                            ),
+                          ),
+                          child: Center(
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              width: 160,
+                              height: 160,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: state is ActivityTracking
+                                    ? const Color(0xFFFF6B35).withOpacity(0.15)
+                                    : const Color(0xFF1A1A1A),
+                                border: Border.all(
+                                  color: state is ActivityTracking
+                                      ? const Color(0xFFFF6B35)
+                                      : const Color(0xFF2A2A2A),
+                                  width: 2,
+                                ),
+                              ),
+                              child: Icon(
+                                _getIcon(state),
+                                size: 72,
+                                color: state is ActivityTracking
+                                    ? const Color(0xFFFF6B35)
+                                    : const Color(0xFF4A4A4A),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        Text(
+                          _getLabel(state),
+                          style: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          state is ActivityTracking
+                              ? 'Sesión activa'
+                              : 'Listo para iniciar',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF6B6B6B),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 40),
-                  ElevatedButton.icon(
-                    onPressed: () {
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(32, 0, 32, 48),
+                  child: GestureDetector(
+                    onTap: () async {
                       if (state is ActivityTracking) {
-                        context.read<ActivityBloc>().add(ActivityStopped());
+                        await _saveSessionRecord(state);
+                        if (context.mounted) {
+                          context.read<ActivityBloc>().add(ActivityStopped());
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                                  const Text('✅ Sesión guardada en historial'),
+                              backgroundColor: const Color(0xFFFF6B35),
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          );
+                        }
                       } else {
-                        _requestPermissionsAndStart();
+                        await _requestPermissionsAndStart();
                       }
                     },
-                    icon: Icon(
-                      state is ActivityTracking ? Icons.stop : Icons.play_arrow,
-                    ),
-                    label: Text(
-                      state is ActivityTracking ? 'Detener' : 'Iniciar',
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: state is ActivityTracking
-                          ? Colors.red
-                          : Colors.green,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 16),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      width: double.infinity,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: state is ActivityTracking
+                            ? const Color(0xFF2A2A2A)
+                            : const Color(0xFFFF6B35),
+                        borderRadius: BorderRadius.circular(20),
+                        border: state is ActivityTracking
+                            ? Border.all(color: Colors.red, width: 1.5)
+                            : null,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            state is ActivityTracking
+                                ? Icons.stop_rounded
+                                : Icons.play_arrow_rounded,
+                            color: state is ActivityTracking
+                                ? Colors.red
+                                : Colors.white,
+                            size: 28,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            state is ActivityTracking
+                                ? 'Detener sesión'
+                                : 'Iniciar sesión',
+                            style: TextStyle(
+                              color: state is ActivityTracking
+                                  ? Colors.red
+                                  : Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),
@@ -1251,10 +1468,790 @@ class _ActivityPageState extends State<ActivityPage> {
   }
 
   String _getLabel(ActivityBlocState state) {
-    if (state is ActivityTracking) {
-      return state.current.label;
-    }
+    if (state is ActivityTracking) return state.current.label;
     return 'Presiona Iniciar';
+  }
+}
+
+          
+================================================
+📄 ARCHIVO: lib\features\activity_record\data\repositories\activity_record_repository.dart
+================================================
+
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../domain/entities/activity_record.dart';
+
+/// Repositorio CRUD para el historial de actividad
+/// Usa shared_preferences como persistencia local (JSON)
+class ActivityRecordRepository {
+  static const String _key = 'activity_records';
+
+  // ── CREATE ────────────────────────────────────────────────────
+  Future<void> saveRecord(ActivityRecord record) async {
+    final prefs = await SharedPreferences.getInstance();
+    final records = await getAllRecords();
+    // Reemplaza si ya existe el mismo id (UPDATE), sino agrega (CREATE)
+    final index = records.indexWhere((r) => r.id == record.id);
+    if (index >= 0) {
+      records[index] = record;
+    } else {
+      records.add(record);
+    }
+    final encoded = records.map((r) => jsonEncode(r.toMap())).toList();
+    await prefs.setStringList(_key, encoded);
+  }
+
+  // ── READ ALL ──────────────────────────────────────────────────
+  Future<List<ActivityRecord>> getAllRecords() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getStringList(_key) ?? [];
+    return raw
+        .map((s) => ActivityRecord.fromMap(
+              jsonDecode(s) as Map<String, dynamic>,
+            ))
+        .toList()
+      ..sort((a, b) => b.startedAt.compareTo(a.startedAt)); // más reciente primero
+  }
+
+  // ── READ ONE ──────────────────────────────────────────────────
+  Future<ActivityRecord?> getRecordById(String id) async {
+    final records = await getAllRecords();
+    try {
+      return records.firstWhere((r) => r.id == id);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  // ── UPDATE ────────────────────────────────────────────────────
+  Future<void> updateRecord(ActivityRecord updated) => saveRecord(updated);
+
+  // ── DELETE ────────────────────────────────────────────────────
+  Future<void> deleteRecord(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final records = await getAllRecords();
+    records.removeWhere((r) => r.id == id);
+    final encoded = records.map((r) => jsonEncode(r.toMap())).toList();
+    await prefs.setStringList(_key, encoded);
+  }
+
+  // ── DELETE ALL ────────────────────────────────────────────────
+  Future<void> clearAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_key);
+  }
+}
+
+          
+================================================
+📄 ARCHIVO: lib\features\activity_record\domain\entities\activity_record.dart
+================================================
+
+import 'package:equatable/equatable.dart';
+
+/// Registro histórico de una sesión de actividad física
+class ActivityRecord extends Equatable {
+  final String id;
+  final String activityType;   // "walking", "running", "stationary"
+  final DateTime startedAt;
+  final DateTime? endedAt;
+  final int steps;
+  final double distanceKm;
+  final double calories;
+  final bool hadFallDetected;
+
+  const ActivityRecord({
+    required this.id,
+    required this.activityType,
+    required this.startedAt,
+    this.endedAt,
+    this.steps = 0,
+    this.distanceKm = 0.0,
+    this.calories = 0.0,
+    this.hadFallDetected = false,
+  });
+
+  Duration get duration {
+    final end = endedAt ?? DateTime.now();
+    return end.difference(startedAt);
+  }
+
+  String get durationLabel {
+    final d = duration;
+    if (d.inHours > 0) return '${d.inHours}h ${d.inMinutes.remainder(60)}m';
+    return '${d.inMinutes}m ${d.inSeconds.remainder(60)}s';
+  }
+
+  /// Serialización para shared_preferences (JSON)
+  Map<String, dynamic> toMap() => {
+    'id': id,
+    'activityType': activityType,
+    'startedAt': startedAt.toIso8601String(),
+    'endedAt': endedAt?.toIso8601String(),
+    'steps': steps,
+    'distanceKm': distanceKm,
+    'calories': calories,
+    'hadFallDetected': hadFallDetected,
+  };
+
+  factory ActivityRecord.fromMap(Map<String, dynamic> map) => ActivityRecord(
+    id: map['id'] as String,
+    activityType: map['activityType'] as String,
+    startedAt: DateTime.parse(map['startedAt'] as String),
+    endedAt: map['endedAt'] != null
+        ? DateTime.parse(map['endedAt'] as String)
+        : null,
+    steps: (map['steps'] as int?) ?? 0,
+    distanceKm: (map['distanceKm'] as num?)?.toDouble() ?? 0.0,
+    calories: (map['calories'] as num?)?.toDouble() ?? 0.0,
+    hadFallDetected: (map['hadFallDetected'] as bool?) ?? false,
+  );
+
+  ActivityRecord copyWith({
+    String? activityType,
+    DateTime? endedAt,
+    int? steps,
+    double? distanceKm,
+    double? calories,
+    bool? hadFallDetected,
+  }) =>
+      ActivityRecord(
+        id: id,
+        activityType: activityType ?? this.activityType,
+        startedAt: startedAt,
+        endedAt: endedAt ?? this.endedAt,
+        steps: steps ?? this.steps,
+        distanceKm: distanceKm ?? this.distanceKm,
+        calories: calories ?? this.calories,
+        hadFallDetected: hadFallDetected ?? this.hadFallDetected,
+      );
+
+  @override
+  List<Object?> get props => [id, activityType, startedAt, endedAt, steps];
+}
+
+          
+================================================
+📄 ARCHIVO: lib\features\activity_record\presentation\bloc\activity_record_bloc.dart
+================================================
+
+import 'dart:async';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
+import '../../data/repositories/activity_record_repository.dart';
+import '../../domain/entities/activity_record.dart';
+
+// ── EVENTOS ────────────────────────────────────────────────────
+abstract class ActivityRecordEvent extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
+
+class LoadRecords extends ActivityRecordEvent {}
+
+class AddRecord extends ActivityRecordEvent {
+  final ActivityRecord record;
+  AddRecord(this.record);
+  @override
+  List<Object?> get props => [record];
+}
+
+class UpdateRecord extends ActivityRecordEvent {
+  final ActivityRecord record;
+  UpdateRecord(this.record);
+  @override
+  List<Object?> get props => [record];
+}
+
+class DeleteRecord extends ActivityRecordEvent {
+  final String id;
+  DeleteRecord(this.id);
+  @override
+  List<Object?> get props => [id];
+}
+
+class ClearAllRecords extends ActivityRecordEvent {}
+
+// ── ESTADOS ────────────────────────────────────────────────────
+abstract class ActivityRecordState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
+
+class ActivityRecordInitial extends ActivityRecordState {}
+
+class ActivityRecordLoading extends ActivityRecordState {}
+
+class ActivityRecordLoaded extends ActivityRecordState {
+  final List<ActivityRecord> records;
+  ActivityRecordLoaded(this.records);
+  @override
+  List<Object?> get props => [records];
+}
+
+class ActivityRecordError extends ActivityRecordState {
+  final String message;
+  ActivityRecordError(this.message);
+  @override
+  List<Object?> get props => [message];
+}
+
+// ── BLOC ───────────────────────────────────────────────────────
+class ActivityRecordBloc
+    extends Bloc<ActivityRecordEvent, ActivityRecordState> {
+  final ActivityRecordRepository _repository;
+
+  ActivityRecordBloc(this._repository) : super(ActivityRecordInitial()) {
+    on<LoadRecords>(_onLoad);
+    on<AddRecord>(_onAdd);
+    on<UpdateRecord>(_onUpdate);
+    on<DeleteRecord>(_onDelete);
+    on<ClearAllRecords>(_onClearAll);
+  }
+
+  Future<void> _onLoad(LoadRecords event, Emitter emit) async {
+    emit(ActivityRecordLoading());
+    try {
+      final records = await _repository.getAllRecords();
+      emit(ActivityRecordLoaded(records));
+    } catch (e) {
+      emit(ActivityRecordError(e.toString()));
+    }
+  }
+
+  Future<void> _onAdd(AddRecord event, Emitter emit) async {
+    await _repository.saveRecord(event.record);
+    add(LoadRecords());
+  }
+
+  Future<void> _onUpdate(UpdateRecord event, Emitter emit) async {
+    await _repository.updateRecord(event.record);
+    add(LoadRecords());
+  }
+
+  Future<void> _onDelete(DeleteRecord event, Emitter emit) async {
+    await _repository.deleteRecord(event.id);
+    add(LoadRecords());
+  }
+
+  Future<void> _onClearAll(ClearAllRecords event, Emitter emit) async {
+    await _repository.clearAll();
+    add(LoadRecords());
+  }
+}
+
+          
+================================================
+📄 ARCHIVO: lib\features\activity_record\presentation\pages\history_page.dart
+================================================
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/activity_record_bloc.dart';
+import '../../domain/entities/activity_record.dart';
+import '../../../../injection_container.dart';
+
+class HistoryPage extends StatelessWidget {
+  const HistoryPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => sl<ActivityRecordBloc>()..add(LoadRecords()),
+      child: const _HistoryView(),
+    );
+  }
+}
+
+class _HistoryView extends StatelessWidget {
+  const _HistoryView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF0F0F0F),
+      appBar: AppBar(
+        title: const Text(
+          'Historial',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: const Color(0xFF1A1A1A),
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete_sweep_outlined,
+                color: Color(0xFF6B6B6B)),
+            tooltip: 'Borrar todo',
+            onPressed: () => _confirmClearAll(context),
+          ),
+        ],
+      ),
+      body: BlocBuilder<ActivityRecordBloc, ActivityRecordState>(
+        builder: (context, state) {
+          if (state is ActivityRecordLoading) {
+            return const Center(
+              child: CircularProgressIndicator(color: Color(0xFFFF6B35)),
+            );
+          }
+          if (state is ActivityRecordError) {
+            return Center(
+              child: Text(state.message,
+                  style: const TextStyle(color: Colors.white)),
+            );
+          }
+          if (state is ActivityRecordLoaded) {
+            if (state.records.isEmpty) return _buildEmpty();
+            return _buildList(context, state.records);
+          }
+          return const SizedBox.shrink();
+        },
+      ),
+    );
+  }
+
+  Widget _buildEmpty() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1A1A1A),
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: const Color(0xFF2A2A2A),
+                width: 1,
+              ),
+            ),
+            child: const Icon(
+              Icons.history,
+              size: 48,
+              color: Color(0xFF4A4A4A),
+            ),
+          ),
+          const SizedBox(height: 20),
+          const Text(
+            'Sin registros todavía',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Inicia una sesión para ver tu historial',
+            style: TextStyle(fontSize: 14, color: Color(0xFF6B6B6B)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildList(BuildContext context, List<ActivityRecord> records) {
+    final totalSteps = records.fold<int>(0, (sum, r) => sum + r.steps);
+    final totalKm = records.fold<double>(0, (sum, r) => sum + r.distanceKm);
+    final totalCal = records.fold<double>(0, (sum, r) => sum + r.calories);
+
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: _buildSummaryCard(
+            totalSteps: totalSteps,
+            totalKm: totalKm,
+            totalCal: totalCal,
+            count: records.length,
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (ctx, i) => _RecordCard(
+              record: records[i],
+              onEdit: () => _showEditDialog(ctx, records[i]),
+              onDelete: () => ctx
+                  .read<ActivityRecordBloc>()
+                  .add(DeleteRecord(records[i].id)),
+            ),
+            childCount: records.length,
+          ),
+        ),
+        const SliverToBoxAdapter(child: SizedBox(height: 24)),
+      ],
+    );
+  }
+
+  Widget _buildSummaryCard({
+    required int totalSteps,
+    required double totalKm,
+    required double totalCal,
+    required int count,
+  }) {
+    return Container(
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A1A),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(
+          color: const Color(0xFFFF6B35).withOpacity(0.4),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            '$count sesiones registradas',
+            style: const TextStyle(
+              color: Color(0xFF9E9E9E),
+              fontSize: 13,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _SummaryStat(
+                icon: Icons.directions_walk,
+                value: '$totalSteps',
+                label: 'pasos',
+              ),
+              Container(width: 1, height: 36, color: const Color(0xFF2A2A2A)),
+              _SummaryStat(
+                icon: Icons.straighten,
+                value: totalKm.toStringAsFixed(2),
+                label: 'km',
+              ),
+              Container(width: 1, height: 36, color: const Color(0xFF2A2A2A)),
+              _SummaryStat(
+                icon: Icons.local_fire_department,
+                value: totalCal.toStringAsFixed(0),
+                label: 'cal',
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _confirmClearAll(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: const Color(0xFF1A1A1A),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Text('¿Borrar todo?',
+            style: TextStyle(color: Colors.white)),
+        content: const Text('Esta acción no se puede deshacer.',
+            style: TextStyle(color: Color(0xFF9E9E9E))),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar',
+                style: TextStyle(color: Color(0xFF6B6B6B))),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            onPressed: () {
+              context.read<ActivityRecordBloc>().add(ClearAllRecords());
+              Navigator.pop(context);
+            },
+            child: const Text('Borrar',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showEditDialog(BuildContext context, ActivityRecord record) {
+    String selectedType = record.activityType;
+
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF1A1A1A),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Text('Editar registro',
+            style: TextStyle(color: Colors.white)),
+        content: StatefulBuilder(
+          builder: (context, setDialogState) {
+            return DropdownButtonFormField<String>(
+              value: selectedType,
+              dropdownColor: const Color(0xFF2A2A2A),
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: 'Tipo de actividad',
+                labelStyle: const TextStyle(color: Color(0xFF9E9E9E)),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: Color(0xFF2A2A2A)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: Color(0xFFFF6B35)),
+                ),
+              ),
+              items: const [
+                DropdownMenuItem(value: 'walking', child: Text('Caminando')),
+                DropdownMenuItem(value: 'running', child: Text('Corriendo')),
+                DropdownMenuItem(
+                    value: 'stationary', child: Text('Estacionario')),
+              ],
+              onChanged: (val) {
+                if (val != null) setDialogState(() => selectedType = val);
+              },
+            );
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancelar',
+                style: TextStyle(color: Color(0xFF6B6B6B))),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFFF6B35)),
+            onPressed: () {
+              context.read<ActivityRecordBloc>().add(
+                    UpdateRecord(record.copyWith(activityType: selectedType)),
+                  );
+              Navigator.pop(ctx);
+            },
+            child: const Text('Guardar',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SummaryStat extends StatelessWidget {
+  final IconData icon;
+  final String value;
+  final String label;
+
+  const _SummaryStat({
+    required this.icon,
+    required this.value,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Icon(icon, color: const Color(0xFFFF6B35), size: 20),
+        const SizedBox(height: 6),
+        Text(value,
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold)),
+        Text(label,
+            style:
+                const TextStyle(color: Color(0xFF6B6B6B), fontSize: 12)),
+      ],
+    );
+  }
+}
+
+class _RecordCard extends StatelessWidget {
+  final ActivityRecord record;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+
+  const _RecordCard({
+    required this.record,
+    required this.onEdit,
+    required this.onDelete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+      key: Key(record.id),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 24),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        decoration: BoxDecoration(
+          color: Colors.red.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.red.withOpacity(0.5)),
+        ),
+        child: const Icon(Icons.delete, color: Colors.red),
+      ),
+      confirmDismiss: (_) async {
+        return await showDialog<bool>(
+              context: context,
+              builder: (_) => AlertDialog(
+                backgroundColor: const Color(0xFF1A1A1A),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                title: const Text('¿Eliminar registro?',
+                    style: TextStyle(color: Colors.white)),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: const Text('Cancelar',
+                        style: TextStyle(color: Color(0xFF6B6B6B))),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red),
+                    onPressed: () => Navigator.pop(context, true),
+                    child: const Text('Eliminar',
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ],
+              ),
+            ) ??
+            false;
+      },
+      onDismissed: (_) => onDelete(),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        decoration: BoxDecoration(
+          color: const Color(0xFF1A1A1A),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: const Color(0xFF2A2A2A), width: 1),
+        ),
+        child: ListTile(
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          leading: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: _typeColor(record.activityType).withOpacity(0.15),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              _typeIcon(record.activityType),
+              color: _typeColor(record.activityType),
+              size: 22,
+            ),
+          ),
+          title: Text(
+            _typeLabel(record.activityType),
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 4),
+              Text(
+                '${record.steps} pasos · ${record.distanceKm.toStringAsFixed(2)} km · ${record.calories.toStringAsFixed(0)} cal',
+                style: const TextStyle(
+                    fontSize: 12, color: Color(0xFF9E9E9E)),
+              ),
+              Text(
+                _formatDate(record.startedAt),
+                style: const TextStyle(
+                    fontSize: 11, color: Color(0xFF6B6B6B)),
+              ),
+              if (record.hadFallDetected)
+                Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.red.withOpacity(0.4)),
+                  ),
+                  child: const Text(
+                    '⚠ Caída detectada',
+                    style: TextStyle(fontSize: 11, color: Colors.red),
+                  ),
+                ),
+            ],
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                record.durationLabel,
+                style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF9E9E9E),
+                    fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(width: 4),
+              PopupMenuButton<String>(
+                color: const Color(0xFF2A2A2A),
+                icon: const Icon(Icons.more_vert,
+                    color: Color(0xFF6B6B6B), size: 20),
+                onSelected: (v) {
+                  if (v == 'edit') onEdit();
+                  if (v == 'delete') onDelete();
+                },
+                itemBuilder: (_) => const [
+                  PopupMenuItem(
+                    value: 'edit',
+                    child: Text('Editar',
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                  PopupMenuItem(
+                    value: 'delete',
+                    child: Text('Eliminar',
+                        style: TextStyle(color: Colors.red)),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  IconData _typeIcon(String type) {
+    switch (type) {
+      case 'running':
+        return Icons.directions_run;
+      case 'walking':
+        return Icons.directions_walk;
+      default:
+        return Icons.accessibility_new;
+    }
+  }
+
+  Color _typeColor(String type) {
+    switch (type) {
+      case 'running':
+        return const Color(0xFFFF6B35);
+      case 'walking':
+        return const Color(0xFF4CAF50);
+      default:
+        return const Color(0xFF9E9E9E);
+    }
+  }
+
+  String _typeLabel(String type) {
+    switch (type) {
+      case 'running':
+        return 'Corriendo';
+      case 'walking':
+        return 'Caminando';
+      default:
+        return 'Estacionario';
+    }
+  }
+
+  String _formatDate(DateTime dt) {
+    return '${dt.day}/${dt.month}/${dt.year} ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
   }
 }
 
@@ -1263,16 +2260,18 @@ class _ActivityPageState extends State<ActivityPage> {
 📄 ARCHIVO: lib\features\auth\data\datasources\accelerometer_datasource.dart
 ================================================
 
-import 'package:flutter/services.dart';
+import 'dart:math';
+import 'package:sensors_plus/sensors_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../../../../core/platform/platform_channels.dart';
 import '../../domain/entities/step_data.dart';
 
-/// DataSource para acelerómetro usando EventChannel
+/// DataSource para acelerómetro
+/// ANTES: EventChannel personalizado hacia código nativo Kotlin
+/// AHORA: sensors_plus directamente (mismo plugin, sin capa nativa custom)
 ///
-/// - EventChannel se usa para STREAMS de datos continuos
-/// - A diferencia de MethodChannel (petición/respuesta),
-///   EventChannel envía datos constantemente
+/// sensors_plus expone accelerometerEventStream() que ya es un broadcast stream
+/// de SensorEvent con x, y, z en m/s².
+/// Sobre esos datos crudos calculamos pasos y tipo de actividad en Dart.
 abstract class AccelerometerDataSource {
   Stream<StepData> get stepStream;
   Future<void> startCounting();
@@ -1281,80 +2280,102 @@ abstract class AccelerometerDataSource {
 }
 
 class AccelerometerDataSourceImpl implements AccelerometerDataSource {
-  /// EventChannel: para recibir stream de datos
-  final EventChannel _eventChannel = const EventChannel(
-    PlatformChannels.accelerometer
-  );
+  int _stepCount = 0;
+  DateTime? _lastStepTime;
 
-  /// MethodChannel auxiliar: para control (start/stop)
-  final MethodChannel _methodChannel = const MethodChannel(
-    '${PlatformChannels.accelerometer}/control'
-  );
+  // Ajustado para Infinix Note 40 Pro
+  static const double _stepThreshold = 14.5;
+  static const Duration _stepCooldown = Duration(milliseconds: 400);
 
-  late final Stream<StepData> _sharedStream = _eventChannel
-      .receiveBroadcastStream()
-      .map((event) => StepData.fromMap(event as Map<dynamic, dynamic>));
+  /// Transforma el stream crudo de acelerómetro en StepData
+  /// con conteo de pasos y clasificación de actividad.
+  late final Stream<StepData> _stream = accelerometerEventStream().map((event) {
+    final double magnitude = sqrt(
+      event.x * event.x +
+          event.y * event.y +
+          event.z * event.z,
+    );
+
+    final now = DateTime.now();
+
+    // Detectar paso por umbral de magnitud y cooldown
+    if (magnitude > _stepThreshold) {
+      if (_lastStepTime == null ||
+          now.difference(_lastStepTime!) > _stepCooldown) {
+        _stepCount++;
+        _lastStepTime = now;
+      }
+    }
+
+    // Clasificar actividad según magnitud
+    final ActivityType type;
+
+    if (magnitude < 11.0) {
+      type = ActivityType.stationary;
+    } else if (magnitude < 20.0) {
+      type = ActivityType.walking;
+    } else {
+      type = ActivityType.running;
+    }
+
+    return StepData(
+      stepCount: _stepCount,
+      activityType: type,
+      magnitude: magnitude,
+    );
+  }).asBroadcastStream();
 
   @override
-  Stream<StepData> get stepStream => _sharedStream;
+  Stream<StepData> get stepStream => _stream;
 
   @override
   Future<void> startCounting() async {
-    await _methodChannel.invokeMethod('start');
+    _stepCount = 0;
+    _lastStepTime = null;
   }
 
   @override
   Future<void> stopCounting() async {
-    await _methodChannel.invokeMethod('stop');
+    // sensors_plus se cancela cancelando la suscripción al stream
   }
 
   @override
   Future<bool> requestPermissions() async {
     final activityStatus = await Permission.activityRecognition.request();
     final sensorsStatus = await Permission.sensors.request();
+
     return activityStatus.isGranted && sensorsStatus.isGranted;
   }
 }
-
 
           
 ================================================
 📄 ARCHIVO: lib\features\auth\data\datasources\biometric_datasource.dart
 ================================================
 
-import 'package:flutter/services.dart';
-import '../../../../core/platform/platform_channels.dart';
+import 'package:local_auth/local_auth.dart';
 import '../../domain/entities/auth_result.dart';
 
-/// DataSource para autenticación biométrica usando Platform Channels
-/// - Este es el LADO FLUTTER del Platform Channel
-/// - Usamos MethodChannel porque es petición/respuesta
-/// - El nombre del canal DEBE coincidir con el lado Android
+/// DataSource para autenticación biométrica
+/// ANTES: MethodChannel manual hacia Android nativo
+/// AHORA: Plugin local_auth (maneja iOS y Android automáticamente)
 abstract class BiometricDataSource {
   Future<bool> canAuthenticate();
   Future<AuthResult> authenticate();
 }
 
 class BiometricDataSourceImpl implements BiometricDataSource {
-  /// MethodChannel: canal de comunicación Flutter ↔ Android
-  /// El nombre debe ser exactamente igual en ambos lados
-  final MethodChannel _channel = const MethodChannel(
-    PlatformChannels.biometric
-  );
+  /// local_auth abstrae toda la comunicación con la plataforma
+  final LocalAuthentication _auth = LocalAuthentication();
 
   @override
   Future<bool> canAuthenticate() async {
     try {
-      /// invokeMethod: envía un mensaje a Android y espera respuesta
-      /// - Parámetro 1: nombre del método (debe coincidir en Android)
-      /// - Retorna: un Future con la respuesta
-      final result = await _channel.invokeMethod<bool>(
-        'checkBiometricSupport'
-      );
-
-      return result ?? false;
-    } on PlatformException catch (e) {
-      print('Error verificando biometría: ${e.message}');
+      // Verifica si el dispositivo soporta biometría
+      final bool canAuthenticateWithBiometrics = await _auth.canCheckBiometrics;
+      final bool canAuthenticate = await _auth.isDeviceSupported();
+      return canAuthenticateWithBiometrics && canAuthenticate;
+    } catch (e) {
       return false;
     }
   }
@@ -1362,22 +2383,28 @@ class BiometricDataSourceImpl implements BiometricDataSource {
   @override
   Future<AuthResult> authenticate() async {
     try {
-      /// Llamamos al método 'authenticate' del lado Android
-      final result = await _channel.invokeMethod<bool>('authenticate');
+      final bool didAuthenticate = await _auth.authenticate(
+        localizedReason: 'Autentícate para acceder a Fitness Tracker',
+        options: const AuthenticationOptions(
+          biometricOnly: false, // Permite PIN como fallback
+          stickyAuth: true,     // Mantiene el diálogo si el usuario cambia de app
+        ),
+      );
 
       return AuthResult(
-        success: result ?? false,
-        message: result == true ? 'Autenticación exitosa' : 'Autenticación fallida',
+        success: didAuthenticate,
+        message: didAuthenticate
+            ? 'Autenticación exitosa'
+            : 'Autenticación cancelada',
       );
-    } on PlatformException catch (e) {
+    } catch (e) {
       return AuthResult(
         success: false,
-        message: 'Error: ${e.message}',
+        message: 'Error de autenticación: $e',
       );
     }
   }
 }
-
 
           
 ================================================
@@ -1575,6 +2602,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0F0F0F),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
@@ -1584,61 +2612,92 @@ class LoginPage extends StatelessWidget {
               SnackBar(
                 content: Text(state.message),
                 backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             );
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            return Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
-                ),
-              ),
-              child: SafeArea(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    // Logo
+                    Container(
+                      padding: const EdgeInsets.all(28),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1A1A1A),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: const Color(0xFFFF6B35).withOpacity(0.4),
+                          width: 2,
+                        ),
+                      ),
+                      child: const Icon(
                         Icons.fitness_center,
-                        size: 100,
+                        size: 64,
+                        color: Color(0xFFFF6B35),
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    const Text(
+                      'Fitness Tracker',
+                      style: TextStyle(
+                        fontSize: 34,
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        'Fitness Tracker',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Tu compañero de entrenamiento',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xFF6B6B6B),
                       ),
-                      const SizedBox(height: 48),
-
-                      if (state is AuthLoading)
-                        const CircularProgressIndicator(color: Colors.white)
-                      else
-                        ElevatedButton.icon(
+                    ),
+                    const Spacer(),
+                    // Botón
+                    if (state is AuthLoading)
+                      const CircularProgressIndicator(
+                        color: Color(0xFFFF6B35),
+                      )
+                    else
+                      SizedBox(
+                        width: double.infinity,
+                        height: 60,
+                        child: ElevatedButton.icon(
                           onPressed: () {
-                            context.read<AuthBloc>().add(AuthenticateRequested());
+                            context
+                                .read<AuthBloc>()
+                                .add(AuthenticateRequested());
                           },
-                          icon: const Icon(Icons.fingerprint),
-                          label: const Text('Autenticar con Huella'),
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 32,
-                              vertical: 16,
+                          icon: const Icon(Icons.fingerprint, size: 26),
+                          label: const Text(
+                            'Autenticar con Huella',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
                             ),
-                            backgroundColor: Colors.white,
-                            foregroundColor: const Color(0xFF6366F1),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFFF6B35),
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
                           ),
                         ),
-                    ],
-                  ),
+                      ),
+                    const SizedBox(height: 48),
+                  ],
                 ),
               ),
             );
@@ -1648,7 +2707,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
 
           
 ================================================
@@ -1855,23 +2913,12 @@ class _StepCounterWidgetState extends State<StepCounterWidget> {
 📄 ARCHIVO: lib\features\auth\tracking\data\datasources\gps_datasource.dart
 ================================================
 
-import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
-import '../../../../../core/platform/platform_channels.dart';
+import 'package:geolocator/geolocator.dart';
 import '../../domain/entities/location_point.dart';
 
 /// DataSource para GPS
-///
-/// EXPLICACIÓN DIDÁCTICA:
-/// - Combina MethodChannel (operaciones puntuales)
-/// - Con EventChannel (stream de ubicaciones)
-/// abstract class GpsDataSource {
-///   Future<LocationPoint?> getCurrentLocation();
-///   Stream<LocationPoint> get locationStream;
-///   Future<bool> isGpsEnabled();
-///   Future<bool> requestPermissions();
-/// }
-
+/// ANTES: MethodChannel + EventChannel custom hacia Kotlin
+/// AHORA: Plugin geolocator (maneja permisos, settings y stream automáticamente)
 abstract class GpsDataSource {
   Future<LocationPoint?> getCurrentLocation();
   Stream<LocationPoint> get locationStream;
@@ -1881,64 +2928,73 @@ abstract class GpsDataSource {
 }
 
 class GpsDataSourceImpl implements GpsDataSource {
-  final MethodChannel _methodChannel = const MethodChannel(
-    PlatformChannels.gps
+  /// Configuración del stream de posición
+  static const LocationSettings _locationSettings = LocationSettings(
+    accuracy: LocationAccuracy.high,
+    distanceFilter: 2, // Actualizar cada 2 metros de movimiento
   );
 
-  final EventChannel _eventChannel = const EventChannel(
-    '${PlatformChannels.gps}/stream'
-  );
-
-  @override
-  Future<LocationPoint?> getCurrentLocation() async {
-    try {
-      final result = await _methodChannel.invokeMethod('getCurrentLocation');
-      if (result != null) {
-        return LocationPoint.fromMap(result as Map<dynamic, dynamic>);
-      }
-      return null;
-    } on PlatformException catch (e) {
-      print('Error obteniendo ubicación: ${e.message}');
-      return null;
-    }
-  }
-
-  late final Stream<LocationPoint> _sharedStream = _eventChannel
-      .receiveBroadcastStream()
-      .map((event) => LocationPoint.fromMap(event as Map<dynamic, dynamic>));
+  late final Stream<LocationPoint> _sharedStream = Geolocator
+      .getPositionStream(locationSettings: _locationSettings)
+      .map(_positionToPoint)
+      .asBroadcastStream();
 
   @override
   Stream<LocationPoint> get locationStream => _sharedStream;
 
   @override
-  Future<bool> isGpsEnabled() async {
+  Future<LocationPoint?> getCurrentLocation() async {
     try {
-      return await _methodChannel.invokeMethod('isGpsEnabled') ?? false;
-    } on PlatformException {
-      return false;
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
+      );
+      return _positionToPoint(position);
+    } catch (e) {
+      return null;
     }
+  }
+
+  @override
+  Future<bool> isGpsEnabled() async {
+    return await Geolocator.isLocationServiceEnabled();
   }
 
   @override
   Future<bool> openLocationSettings() async {
-    try {
-      return await _methodChannel.invokeMethod('openLocationSettings') ?? false;
-    } on PlatformException {
-      return false;
-    }
+    return await Geolocator.openLocationSettings();
   }
 
   @override
   Future<bool> requestPermissions() async {
-    final locationStatus = await Permission.location.request();
-    if (!locationStatus.isGranted) {
-      final whenInUseStatus = await Permission.locationWhenInUse.request();
-      return whenInUseStatus.isGranted;
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
     }
-    return locationStatus.isGranted;
+
+    if (permission == LocationPermission.deniedForever) {
+      await Geolocator.openAppSettings();
+      return false;
+    }
+
+    return permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse;
+  }
+
+  /// Convierte Position de geolocator a nuestra entidad LocationPoint
+  LocationPoint _positionToPoint(Position position) {
+    return LocationPoint(
+      latitude: position.latitude,
+      longitude: position.longitude,
+      altitude: position.altitude,
+      speed: position.speed,
+      accuracy: position.accuracy,
+      timestamp: position.timestamp,
+    );
   }
 }
-
 
           
 ================================================
@@ -2517,6 +3573,8 @@ import 'features/activity/data/services/tts_service.dart';
 import 'features/activity/presentation/bloc/activity_bloc.dart';
 import 'features/auth/data/datasources/accelerometer_datasource.dart';
 import 'features/auth/tracking/data/datasources/gps_datasource.dart';
+import 'features/activity_record/data/repositories/activity_record_repository.dart';
+import 'features/activity_record/presentation/bloc/activity_record_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -2524,7 +3582,7 @@ void initDependencies() {
   // Servicios
   sl.registerLazySingleton<TtsService>(() => TtsService());
 
-  // Datasources
+  // Datasources (ahora usando plugins, misma interfaz)
   sl.registerLazySingleton<AccelerometerDataSource>(
     () => AccelerometerDataSourceImpl(),
   );
@@ -2535,12 +3593,20 @@ void initDependencies() {
     () => ActivityDataSourceImpl(sl<AccelerometerDataSource>()),
   );
 
+  // CRUD - Historial
+  sl.registerLazySingleton<ActivityRecordRepository>(
+    () => ActivityRecordRepository(),
+  );
+
   // BLoCs
   sl.registerFactory<ActivityBloc>(
     () => ActivityBloc(
       dataSource: sl<ActivityDataSourceImpl>(),
       ttsService: sl<TtsService>(),
     ),
+  );
+  sl.registerFactory<ActivityRecordBloc>(
+    () => ActivityRecordBloc(sl<ActivityRecordRepository>()),
   );
 }
 
@@ -2549,30 +3615,25 @@ void initDependencies() {
 📄 ARCHIVO: lib\main.dart
 ================================================
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'injection_container.dart';
 
-// Auth
 import 'features/auth/data/datasources/biometric_datasource.dart';
 import 'features/auth/domain/usecases/authenticate_user.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/pages/login_page.dart';
-
-// Steps and Tracking (Rutas corregidas)
 import 'features/auth/steps/presentation/widgets/step_counter_widget.dart';
 import 'features/auth/tracking/presentation/widgets/route_map_widget.dart';
-
-// Actividad
 import 'features/activity/presentation/bloc/activity_bloc.dart';
 import 'features/activity/presentation/pages/activity_page.dart';
+import 'features/activity_record/presentation/bloc/activity_record_bloc.dart';
+import 'features/activity_record/presentation/pages/history_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Inicializar inyección de dependencias
   initDependencies();
-  
   runApp(const FitnessApp());
 }
 
@@ -2588,8 +3649,41 @@ class FitnessApp extends StatelessWidget {
       title: 'Fitness Tracker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6366F1)),
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF0F0F0F),
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFFFF6B35),
+          secondary: Color(0xFFFF8C5A),
+          surface: Color(0xFF1A1A1A),
+        ),
         useMaterial3: true,
+        cardTheme: CardThemeData(
+          elevation: 0,
+          color: const Color(0xFF1A1A1A),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor: const Color(0xFF1A1A1A),
+          indicatorColor: const Color(0xFFFF6B35).withOpacity(0.2),
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const TextStyle(
+                color: Color(0xFFFF6B35),
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              );
+            }
+            return const TextStyle(color: Color(0xFF6B6B6B), fontSize: 12);
+          }),
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const IconThemeData(color: Color(0xFFFF6B35));
+            }
+            return const IconThemeData(color: Color(0xFF6B6B6B));
+          }),
+        ),
       ),
       home: BlocProvider(
         create: (_) => AuthBloc(authenticateUser),
@@ -2598,6 +3692,8 @@ class FitnessApp extends StatelessWidget {
     );
   }
 }
+
+// ─── AUTH WRAPPER ────────────────────────────────────────────────────────────
 
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({super.key});
@@ -2609,83 +3705,319 @@ class AuthWrapper extends StatefulWidget {
 class _AuthWrapperState extends State<AuthWrapper> {
   bool _isAuthenticated = false;
 
-  void _onAuthSuccess() {
-    setState(() {
-      _isAuthenticated = true;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (_isAuthenticated) {
-      return const HomePage();
-    }
-    return LoginPage(onAuthSuccess: _onAuthSuccess);
+    if (_isAuthenticated) return const MainPage();
+    return LoginPage(
+      onAuthSuccess: () => setState(() => _isAuthenticated = true),
+    );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+// ─── MAIN PAGE CON NAVEGACIÓN ────────────────────────────────────────────────
+
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0F0F0F),
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          // Pestaña 1: Inicio (Paso y Ruta)
-          Scaffold(
-            appBar: AppBar(
-              title: const Text('Fitness Tracker'),
-              backgroundColor: const Color(0xFF6366F1),
-              foregroundColor: Colors.white,
-              elevation: 0,
-            ),
-            body: const SingleChildScrollView(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  StepCounterWidget(),
-                  SizedBox(height: 16),
-                  RouteMapWidget(),
-                ],
-              ),
-            ),
-          ),
-          
-          // Pestaña 2: Detector de Actividad
+          const _DashboardTab(),
           BlocProvider(
             create: (_) => sl<ActivityBloc>(),
             child: const ActivityPage(),
           ),
+          const HistoryPage(),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        selectedItemColor: const Color(0xFF6366F1),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _currentIndex,
+        onDestinationSelected: (i) => setState(() => _currentIndex = i),
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
             label: 'Inicio',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.accessibility_new),
-            label: 'Detector',
+          NavigationDestination(
+            icon: Icon(Icons.directions_run_outlined),
+            selectedIcon: Icon(Icons.directions_run),
+            label: 'Actividad',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.history_outlined),
+            selectedIcon: Icon(Icons.history),
+            label: 'Historial',
           ),
         ],
       ),
+    );
+  }
+}
+
+// ─── DASHBOARD ───────────────────────────────────────────────────────────────
+
+class _DashboardTab extends StatelessWidget {
+  const _DashboardTab();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF0F0F0F),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(child: _buildHeader()),
+          SliverToBoxAdapter(
+            child: BlocProvider(
+              create: (_) => sl<ActivityRecordBloc>()..add(LoadRecords()),
+              child: BlocBuilder<ActivityRecordBloc, ActivityRecordState>(
+                builder: (context, state) {
+                  int steps = 0;
+                  double km = 0;
+                  double cal = 0;
+                  int sessions = 0;
+                  if (state is ActivityRecordLoaded &&
+                      state.records.isNotEmpty) {
+                    final today = state.records.where((r) {
+                      final now = DateTime.now();
+                      return r.startedAt.year == now.year &&
+                          r.startedAt.month == now.month &&
+                          r.startedAt.day == now.day;
+                    }).toList();
+                    steps = today.fold(0, (s, r) => s + r.steps);
+                    km = today.fold(0.0, (s, r) => s + r.distanceKm);
+                    cal = today.fold(0.0, (s, r) => s + r.calories);
+                    sessions = today.length;
+                  }
+                  return _buildStatsSection(
+                    steps: steps,
+                    km: km,
+                    cal: cal,
+                    sessions: sessions,
+                  );
+                },
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: StepCounterWidget(),
+            ),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: RouteMapWidget(),
+            ),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 32)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    final hour = DateTime.now().hour;
+    final greeting = hour < 12
+        ? '¡Buenos días!'
+        : hour < 18
+            ? '¡Buenas tardes!'
+            : '¡Buenas noches!';
+
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20, 56, 20, 24),
+      decoration: const BoxDecoration(
+        color: Color(0xFF1A1A1A),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(32),
+          bottomRight: Radius.circular(32),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                greeting,
+                style: const TextStyle(
+                  color: Color(0xFF9E9E9E),
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'Fitness Tracker',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFF6B35).withOpacity(0.15),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.fitness_center,
+              color: Color(0xFFFF6B35),
+              size: 26,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsSection({
+    required int steps,
+    required double km,
+    required double cal,
+    required int sessions,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Resumen de hoy',
+            style: TextStyle(
+              color: Color(0xFF9E9E9E),
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1A1A1A),
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: const Color(0xFFFF6B35).withOpacity(0.3),
+                width: 1,
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '$steps',
+                      style: const TextStyle(
+                        color: Color(0xFFFF6B35),
+                        fontSize: 56,
+                        fontWeight: FontWeight.bold,
+                        height: 1,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 8, left: 6),
+                      child: Text(
+                        'pasos',
+                        style: TextStyle(
+                          color: Color(0xFF9E9E9E),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _MiniStat(
+                      icon: Icons.straighten,
+                      value: '${km.toStringAsFixed(2)} km',
+                      label: 'Distancia',
+                    ),
+                    Container(
+                      width: 1,
+                      height: 36,
+                      color: const Color(0xFF2A2A2A),
+                    ),
+                    _MiniStat(
+                      icon: Icons.local_fire_department,
+                      value: '${cal.toStringAsFixed(0)} cal',
+                      label: 'Calorías',
+                    ),
+                    Container(
+                      width: 1,
+                      height: 36,
+                      color: const Color(0xFF2A2A2A),
+                    ),
+                    _MiniStat(
+                      icon: Icons.repeat,
+                      value: '$sessions',
+                      label: 'Sesiones',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MiniStat extends StatelessWidget {
+  final IconData icon;
+  final String value;
+  final String label;
+
+  const _MiniStat({
+    required this.icon,
+    required this.value,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Icon(icon, color: const Color(0xFFFF6B35), size: 18),
+        const SizedBox(height: 6),
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Color(0xFF6B6B6B),
+            fontSize: 11,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -2714,17 +4046,22 @@ dependencies:
   # Inyección de dependencias
   get_it: ^7.6.4
 
-  # Manejo de permisos
-  permission_handler: ^11.0.1
+  # ── PLUGINS (reemplazan Platform Channels) ──────────────────
+  # Autenticación biométrica (reemplaza biometric_datasource manual)
+  local_auth: ^2.3.0
 
-  # Acelerómetro crudo - para detección de caídas
+  # GPS y ubicación (reemplaza gps_datasource con EventChannel/MethodChannel)
+  geolocator: ^13.0.2
+  permission_handler: ^11.3.1
+
+  # Acelerómetro y sensores (ya se usaba, ahora es la única fuente)
   sensors_plus: ^5.0.1
-
-  # Clasificación de actividad (caminar / correr / quieto)
-  activity_recognition_flutter: ^6.0.0
 
   # Síntesis de voz
   flutter_tts: ^4.0.2
+
+  # ── CRUD / Persistencia local ────────────────────────────────
+  shared_preferences: ^2.3.2
 
   cupertino_icons: ^1.0.8
 
