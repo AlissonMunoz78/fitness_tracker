@@ -8,15 +8,12 @@ class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
 
   @override
-  State<HistoryPage> createState() => _HistoryPageState();
+  State<HistoryPage> createState() => HistoryPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage>
-    with AutomaticKeepAliveClientMixin {
+// SIN el guión bajo _ para que sea público y accesible desde main.dart
+class HistoryPageState extends State<HistoryPage> {
   late final ActivityRecordBloc _bloc;
-
-  @override
-  bool get wantKeepAlive => false;
 
   @override
   void initState() {
@@ -24,9 +21,7 @@ class _HistoryPageState extends State<HistoryPage>
     _bloc = sl<ActivityRecordBloc>()..add(LoadRecords());
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void reloadRecords() {
     _bloc.add(LoadRecords());
   }
 
@@ -38,7 +33,6 @@ class _HistoryPageState extends State<HistoryPage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return BlocProvider.value(
       value: _bloc,
       child: const _HistoryView(),
@@ -107,7 +101,8 @@ class _HistoryView extends StatelessWidget {
               shape: BoxShape.circle,
               border: Border.all(color: const Color(0xFF2A2A2A)),
             ),
-            child: const Icon(Icons.history, size: 48, color: Color(0xFF4A4A4A)),
+            child: const Icon(Icons.history,
+                size: 48, color: Color(0xFF4A4A4A)),
           ),
           const SizedBox(height: 20),
           const Text(
@@ -130,8 +125,10 @@ class _HistoryView extends StatelessWidget {
 
   Widget _buildList(BuildContext context, List<ActivityRecord> records) {
     final totalSteps = records.fold<int>(0, (sum, r) => sum + r.steps);
-    final totalKm = records.fold<double>(0, (sum, r) => sum + r.distanceKm);
-    final totalCal = records.fold<double>(0, (sum, r) => sum + r.calories);
+    final totalKm =
+        records.fold<double>(0, (sum, r) => sum + r.distanceKm);
+    final totalCal =
+        records.fold<double>(0, (sum, r) => sum + r.calories);
 
     return CustomScrollView(
       slivers: [
@@ -181,7 +178,8 @@ class _HistoryView extends StatelessWidget {
         children: [
           Text(
             '$count sesiones registradas',
-            style: const TextStyle(color: Color(0xFF9E9E9E), fontSize: 13),
+            style:
+                const TextStyle(color: Color(0xFF9E9E9E), fontSize: 13),
           ),
           const SizedBox(height: 16),
           Row(
@@ -193,14 +191,18 @@ class _HistoryView extends StatelessWidget {
                 label: 'pasos',
               ),
               Container(
-                  width: 1, height: 36, color: const Color(0xFF2A2A2A)),
+                  width: 1,
+                  height: 36,
+                  color: const Color(0xFF2A2A2A)),
               _SummaryStat(
                 icon: Icons.straighten,
                 value: totalKm.toStringAsFixed(2),
                 label: 'km',
               ),
               Container(
-                  width: 1, height: 36, color: const Color(0xFF2A2A2A)),
+                  width: 1,
+                  height: 36,
+                  color: const Color(0xFF2A2A2A)),
               _SummaryStat(
                 icon: Icons.local_fire_department,
                 value: totalCal.toStringAsFixed(0),
@@ -218,8 +220,8 @@ class _HistoryView extends StatelessWidget {
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: const Color(0xFF1A1A1A),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)),
         title: const Text('¿Borrar todo?',
             style: TextStyle(color: Colors.white)),
         content: const Text('Esta acción no se puede deshacer.',
@@ -231,13 +233,16 @@ class _HistoryView extends StatelessWidget {
                 style: TextStyle(color: Color(0xFF6B6B6B))),
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            style:
+                ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
-              context.read<ActivityRecordBloc>().add(ClearAllRecords());
+              context
+                  .read<ActivityRecordBloc>()
+                  .add(ClearAllRecords());
               Navigator.pop(context);
             },
-            child:
-                const Text('Borrar', style: TextStyle(color: Colors.white)),
+            child: const Text('Borrar',
+                style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -251,8 +256,8 @@ class _HistoryView extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF1A1A1A),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)),
         title: const Text('Editar registro',
             style: TextStyle(color: Colors.white)),
         content: StatefulBuilder(
@@ -263,14 +268,17 @@ class _HistoryView extends StatelessWidget {
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 labelText: 'Tipo de actividad',
-                labelStyle: const TextStyle(color: Color(0xFF9E9E9E)),
+                labelStyle:
+                    const TextStyle(color: Color(0xFF9E9E9E)),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Color(0xFF2A2A2A)),
+                  borderSide:
+                      const BorderSide(color: Color(0xFF2A2A2A)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Color(0xFFFF6B35)),
+                  borderSide:
+                      const BorderSide(color: Color(0xFFFF6B35)),
                 ),
               ),
               items: const [
@@ -279,10 +287,13 @@ class _HistoryView extends StatelessWidget {
                 DropdownMenuItem(
                     value: 'running', child: Text('Corriendo')),
                 DropdownMenuItem(
-                    value: 'stationary', child: Text('Estacionario')),
+                    value: 'stationary',
+                    child: Text('Estacionario')),
               ],
               onChanged: (val) {
-                if (val != null) setDialogState(() => selectedType = val);
+                if (val != null) {
+                  setDialogState(() => selectedType = val);
+                }
               },
             );
           },
@@ -299,7 +310,8 @@ class _HistoryView extends StatelessWidget {
             onPressed: () {
               context.read<ActivityRecordBloc>().add(
                     UpdateRecord(
-                        record.copyWith(activityType: selectedType)),
+                      record.copyWith(activityType: selectedType),
+                    ),
                   );
               Navigator.pop(ctx);
             },
@@ -335,8 +347,8 @@ class _SummaryStat extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.bold)),
         Text(label,
-            style:
-                const TextStyle(color: Color(0xFF6B6B6B), fontSize: 12)),
+            style: const TextStyle(
+                color: Color(0xFF6B6B6B), fontSize: 12)),
       ],
     );
   }
@@ -361,7 +373,8 @@ class _RecordCard extends StatelessWidget {
       background: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 24),
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        margin:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         decoration: BoxDecoration(
           color: Colors.red.withOpacity(0.2),
           borderRadius: BorderRadius.circular(16),
@@ -398,19 +411,22 @@ class _RecordCard extends StatelessWidget {
       },
       onDismissed: (_) => onDelete(),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        margin:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         decoration: BoxDecoration(
           color: const Color(0xFF1A1A1A),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFF2A2A2A), width: 1),
+          border:
+              Border.all(color: const Color(0xFF2A2A2A), width: 1),
         ),
         child: ListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16, vertical: 8),
           leading: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: _typeColor(record.activityType).withOpacity(0.15),
+              color:
+                  _typeColor(record.activityType).withOpacity(0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -429,7 +445,9 @@ class _RecordCard extends StatelessWidget {
             children: [
               const SizedBox(height: 4),
               Text(
-                '${record.steps} pasos · ${record.distanceKm.toStringAsFixed(2)} km · ${record.calories.toStringAsFixed(0)} cal',
+                '${record.steps} pasos · '
+                '${record.distanceKm.toStringAsFixed(2)} km · '
+                '${record.calories.toStringAsFixed(0)} cal',
                 style: const TextStyle(
                     fontSize: 12, color: Color(0xFF9E9E9E)),
               ),
@@ -446,12 +464,13 @@ class _RecordCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.red.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
-                    border:
-                        Border.all(color: Colors.red.withOpacity(0.4)),
+                    border: Border.all(
+                        color: Colors.red.withOpacity(0.4)),
                   ),
                   child: const Text(
                     '⚠ Caída detectada',
-                    style: TextStyle(fontSize: 11, color: Colors.red),
+                    style:
+                        TextStyle(fontSize: 11, color: Colors.red),
                   ),
                 ),
             ],

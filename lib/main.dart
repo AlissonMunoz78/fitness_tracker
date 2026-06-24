@@ -109,6 +109,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
+  // Clave global para acceder al bloc del historial desde afuera
+  final _historyKey = GlobalKey<HistoryPageState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,12 +124,19 @@ class _MainPageState extends State<MainPage> {
             create: (_) => sl<ActivityBloc>(),
             child: const ActivityPage(),
           ),
-          const HistoryPage(),
+          // Pasamos la key para poder llamar reload desde afuera
+          HistoryPage(key: _historyKey),
         ],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
-        onDestinationSelected: (i) => setState(() => _currentIndex = i),
+        onDestinationSelected: (i) {
+          setState(() => _currentIndex = i);
+          // Si el usuario va al historial, forzar recarga
+          if (i == 2) {
+            _historyKey.currentState?.reloadRecords();
+          }
+        },
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),

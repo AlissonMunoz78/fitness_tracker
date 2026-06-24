@@ -15,13 +15,10 @@ abstract class ActivityEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-/// El usuario presionó "Iniciar"
 class ActivityStarted extends ActivityEvent {}
 
-/// El usuario presionó "Detener"
 class ActivityStopped extends ActivityEvent {}
 
-/// Llegó un nuevo estado del stream de actividad
 class ActivityChanged extends ActivityEvent {
   final ActivityState state;
   ActivityChanged(this.state);
@@ -30,7 +27,6 @@ class ActivityChanged extends ActivityEvent {
   List<Object?> get props => [state];
 }
 
-/// El acelerómetro detectó una caída
 class FallDetected extends ActivityEvent {
   final FallEvent event;
   FallDetected(this.event);
@@ -39,10 +35,8 @@ class FallDetected extends ActivityEvent {
   List<Object?> get props => [event];
 }
 
-/// El usuario respondió "Estoy bien" en el diálogo
 class FallConfirmed extends ActivityEvent {}
 
-/// El usuario respondió "Necesito ayuda" en el diálogo
 class FallDismissed extends ActivityEvent {}
 
 // ═══════════════════════════════════════════════════════════════
@@ -54,10 +48,8 @@ abstract class ActivityBlocState extends Equatable {
   List<Object?> get props => [];
 }
 
-/// Estado inicial antes de iniciar el tracking
 class ActivityInitial extends ActivityBlocState {}
 
-/// Tracking activo con el estado actual del usuario
 class ActivityTracking extends ActivityBlocState {
   final ActivityState current;
   ActivityTracking(this.current);
@@ -66,7 +58,6 @@ class ActivityTracking extends ActivityBlocState {
   List<Object?> get props => [current];
 }
 
-/// Se detectó una caída — la UI debe mostrar el diálogo
 class FallAlert extends ActivityBlocState {
   final FallEvent event;
   FallAlert(this.event);
@@ -75,7 +66,6 @@ class FallAlert extends ActivityBlocState {
   List<Object?> get props => [event];
 }
 
-/// El usuario confirmó que está bien — volver al tracking
 class FallResolved extends ActivityBlocState {}
 
 // ═══════════════════════════════════════════════════════════════
@@ -89,12 +79,8 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityBlocState> {
   StreamSubscription<ActivityState>? _activitySub;
   StreamSubscription<FallEvent>? _fallSub;
 
-  // ── Debounce de voz ──────────────────────────────────────────
-  // Solo se anuncia un cambio si el nuevo estado se mantuvo
-  // estable durante 3 segundos y es diferente al último anunciado.
-  // Justificación: el acelerómetro oscila entre walking/stationary
-  // en milisegundos al dar un paso. 3s garantiza estabilidad real.
-  static const Duration _debounceDuration = Duration(milliseconds: 1500);
+  // 🔥 debounce más estable para cambios de actividad
+  static const Duration _debounceDuration = Duration(milliseconds: 1800);
 
   UserActivityType? _lastAnnouncedType;
   UserActivityType? _pendingType;
@@ -114,15 +100,15 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityBlocState> {
     on<FallDismissed>(_onFallDismissed);
   }
 
-  // ── Iniciar tracking ─────────────────────────────────────────
+  // ─────────────────────────────────────────────
+  // START
+  // ─────────────────────────────────────────────
   Future<void> _onStarted(
     ActivityStarted event,
     Emitter<ActivityBlocState> emit,
   ) async {
     final hasPermission = await _dataSource.requestPermissions();
-    if (!hasPermission) {
-      return;
-    }
+    if (!hasPermission) return;
 
     await _ttsService.init();
 
@@ -131,18 +117,21 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityBlocState> {
       detectedAt: DateTime.now(),
     )));
 
-    // Suscribirse al stream de actividad
-    _activitySub = _dataSource.activityStream.listen((activityState) {
-      add(ActivityChanged(activityState));
-    });
+    // limpiar previos SIEMPRE (evita doble stream bug)
+    await _cancelSubscriptions();
 
-    // Suscribirse al stream de caídas
-    _fallSub = _dataSource.fallStream.listen((fallEvent) {
-      add(FallDetected(fallEvent));
-    });
+    _activitySub = _dataSource.activityStream.listen(
+      (activityState) => add(ActivityChanged(activityState)),
+    );
+
+    _fallSub = _dataSource.fallStream.listen(
+      (fallEvent) => add(FallDetected(fallEvent)),
+    );
   }
 
-  // ── Detener tracking ─────────────────────────────────────────
+  // ─────────────────────────────────────────────
+  // STOP
+  // ─────────────────────────────────────────────
   Future<void> _onStopped(
     ActivityStopped event,
     Emitter<ActivityBlocState> emit,
@@ -151,80 +140,105 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityBlocState> {
     emit(ActivityInitial());
   }
 
-  // ── Nuevo estado de actividad ─────────────────────────────────
+  // ─────────────────────────────────────────────
+  // ACTIVITY UPDATE
+  // ─────────────────────────────────────────────
   void _onActivityChanged(
     ActivityChanged event,
     Emitter<ActivityBlocState> emit,
   ) {
-    // Si estamos en medio de una alerta de caída, ignoramos los cambios de actividad
-    // para evitar interrumpir la alerta de caída o emitir anuncios de voz contradictorios.
-    if (state is FallAlert) {
-      return;
-    }
+    // 🔥 si hay caída, ignorar actividad completamente
+    if (state is FallAlert) return;
 
     final incoming = event.state.type;
 
-    if (incoming != _lastAnnouncedType) {
-      if (incoming != _pendingType) {
-        _debounceTimer?.cancel();
-        _pendingType = incoming;
-
-        if (incoming != UserActivityType.unknown) {
-          _debounceTimer = Timer(_debounceDuration, () {
-            if (_pendingType == incoming && _pendingType != _lastAnnouncedType) {
-              _ttsService.speak(event.state.voiceMessage);
-              _lastAnnouncedType = _pendingType;
-            }
-          });
-        }
-      }
-    } else {
-      _debounceTimer?.cancel();
+    // 🔥 evita spam de cambios iguales
+    if (incoming == _lastAnnouncedType) {
       _pendingType = null;
+      _debounceTimer?.cancel();
+      emit(ActivityTracking(event.state));
+      return;
+    }
+
+    // debounce inteligente
+    if (incoming != _pendingType) {
+      _pendingType = incoming;
+      _debounceTimer?.cancel();
+
+      if (incoming != UserActivityType.unknown) {
+        _debounceTimer = Timer(_debounceDuration, () async {
+          if (_pendingType == incoming &&
+              _pendingType != _lastAnnouncedType) {
+
+            await _ttsService.speak(event.state.voiceMessage);
+
+            _lastAnnouncedType = _pendingType;
+          }
+        });
+      }
     }
 
     emit(ActivityTracking(event.state));
   }
 
-  // ── Caída detectada ──────────────────────────────────────────
+  // ─────────────────────────────────────────────
+  // FALL DETECTED
+  // ─────────────────────────────────────────────
   Future<void> _onFallDetected(
     FallDetected event,
     Emitter<ActivityBlocState> emit,
   ) async {
-    // Cancelar cualquier anuncio de actividad pendiente inmediatamente
     _debounceTimer?.cancel();
     _pendingType = null;
 
-    await _ttsService.speak('¡Atención! Se detectó una posible caída. ¿Estás bien?');
+    await _ttsService.speak(
+      '¡Atención! Se detectó una posible caída. ¿Estás bien?',
+    );
+
     emit(FallAlert(event.event));
   }
 
-  // ── Usuario respondió "Estoy bien" ───────────────────────────
+  // ─────────────────────────────────────────────
+  // FALL CONFIRMED
+  // ─────────────────────────────────────────────
   Future<void> _onFallConfirmed(
     FallConfirmed event,
     Emitter<ActivityBlocState> emit,
   ) async {
-    await _ttsService.speak('Me alegra que estés bien. Continuando el seguimiento.');
+    await _ttsService.speak(
+      'Perfecto, continuamos el seguimiento.',
+    );
+
     emit(FallResolved());
   }
 
-  // ── Usuario respondió "Necesito ayuda" ───────────────────────
+  // ─────────────────────────────────────────────
+  // FALL DISMISSED
+  // ─────────────────────────────────────────────
   Future<void> _onFallDismissed(
     FallDismissed event,
     Emitter<ActivityBlocState> emit,
   ) async {
-    await _ttsService.speak('Entendido. Por favor busca ayuda de inmediato.');
+    await _ttsService.speak(
+      'Entendido. Ayuda activada.',
+    );
+
     emit(FallResolved());
   }
 
-  // ── Limpieza ──────────────────────────────────────────────────
+  // ─────────────────────────────────────────────
+  // CLEANUP
+  // ─────────────────────────────────────────────
   Future<void> _cancelSubscriptions() async {
     await _activitySub?.cancel();
     await _fallSub?.cancel();
+
     _activitySub = null;
     _fallSub = null;
+
     _debounceTimer?.cancel();
     _debounceTimer = null;
+
     _lastAnnouncedType = null;
     _pendingType = null;
   }

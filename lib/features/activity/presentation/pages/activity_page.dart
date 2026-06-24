@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/activity_bloc.dart';
-import '../../domain/entities/activity_state.dart';
-import '../../data/datasources/activity_datasource_impl.dart';
 import '../../../../injection_container.dart';
 import '../../../activity_record/data/repositories/activity_record_repository.dart';
 import '../../../activity_record/domain/entities/activity_record.dart';
 import '../../../auth/data/datasources/accelerometer_datasource.dart';
+import '../../data/datasources/activity_datasource_impl.dart';
+import '../../domain/entities/activity_state.dart';
 
 class ActivityPage extends StatefulWidget {
   const ActivityPage({super.key});
@@ -19,7 +19,7 @@ class ActivityPage extends StatefulWidget {
 class _ActivityPageState extends State<ActivityPage> {
   DateTime? _sessionStart;
   bool _hadFall = false;
-  String _currentActivityType = 'stationary';
+  final _activityTypeCounts = <UserActivityType, int>{};
 
   @override
   void initState() {
@@ -37,40 +37,41 @@ class _ActivityPageState extends State<ActivityPage> {
       setState(() {
         _sessionStart = DateTime.now();
         _hadFall = false;
-        _currentActivityType = 'stationary';
+        _activityTypeCounts.clear();
       });
+
       context.read<ActivityBloc>().add(ActivityStarted());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Permisos denegados. Ve a Ajustes > Permisos.'),
+        const SnackBar(
+          content: Text('Permisos denegados'),
           backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
         ),
       );
     }
   }
 
-  Future<void> _saveSessionRecord() async {
+  Future<void> _saveSession(ActivityState activityState) async {
     if (_sessionStart == null) return;
 
     final accelerometer = sl<AccelerometerDataSource>();
-    int currentSteps = 0;
-    await accelerometer.stepStream.first.then((data) {
-      currentSteps = data.stepCount;
-    }).catchError((_) {});
+
+    int steps = 0;
+    try {
+      final data = await accelerometer.stepStream.first;
+      steps = data.stepCount;
+    } catch (_) {}
+
+    final savedType = _dominantType() ?? activityState.type;
 
     final record = ActivityRecord(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
-      activityType: _currentActivityType,
+      activityType: savedType.name,
       startedAt: _sessionStart!,
       endedAt: DateTime.now(),
-      steps: currentSteps,
-      distanceKm: currentSteps * 0.0007,
-      calories: currentSteps * 0.04,
+      steps: steps,
+      distanceKm: steps * 0.0007,
+      calories: steps * 0.04,
       hadFallDetected: _hadFall,
     );
 
@@ -79,93 +80,37 @@ class _ActivityPageState extends State<ActivityPage> {
 
   void _showFallDialog(BuildContext context, FallAlert state) {
     _hadFall = true;
-    bool showSecondary = false;
-    Timer? secondaryTimer;
 
-    showDialog<void>(
+    showDialog(
       context: context,
       barrierDismissible: false,
       builder: (dialogContext) {
-        return StatefulBuilder(
-          builder: (ctx, setDialogState) {
-            secondaryTimer ??= Timer(
-              const Duration(seconds: 15),
-              () => setDialogState(() => showSecondary = true),
-            );
-
-            return AlertDialog(
-              backgroundColor: const Color(0xFF1A1A1A),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              title: const Row(
-                children: [
-                  Icon(Icons.warning_amber_rounded,
-                      color: Colors.orange, size: 28),
-                  SizedBox(width: 8),
-                  Text(
-                    '¿Estás bien?',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Se detectó una posible caída.',
-                    style: TextStyle(color: Color(0xFF9E9E9E)),
-                  ),
-                  if (showSecondary) ...[
-                    const SizedBox(height: 12),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.red),
-                      ),
-                      child: const Text(
-                        '¡Por favor responde! ¿Necesitas ayuda?',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    secondaryTimer?.cancel();
-                    context.read<ActivityBloc>().add(FallConfirmed());
-                    Navigator.pop(dialogContext);
-                  },
-                  child: const Text(
-                    'Estoy bien',
-                    style: TextStyle(color: Color(0xFFFF6B35)),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  onPressed: () {
-                    secondaryTimer?.cancel();
-                    context.read<ActivityBloc>().add(FallDismissed());
-                    Navigator.pop(dialogContext);
-                  },
-                  child: const Text('Necesito ayuda'),
-                ),
-              ],
-            );
-          },
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1A1A1A),
+          title: const Text(
+            '¿Estás bien?',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: const Text(
+            'Se detectó una posible caída.',
+            style: TextStyle(color: Colors.grey),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                context.read<ActivityBloc>().add(FallConfirmed());
+                Navigator.pop(dialogContext);
+              },
+              child: const Text('Estoy bien'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.read<ActivityBloc>().add(FallDismissed());
+                Navigator.pop(dialogContext);
+              },
+              child: const Text('Ayuda'),
+            ),
+          ],
         );
       },
     );
@@ -176,42 +121,30 @@ class _ActivityPageState extends State<ActivityPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF0F0F0F),
       appBar: AppBar(
-        title: const Text(
-          'Detector de Actividad',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: const Text('Detector de Actividad'),
         backgroundColor: const Color(0xFF1A1A1A),
-        elevation: 0,
       ),
+
       body: BlocListener<ActivityBloc, ActivityBlocState>(
         listener: (context, state) {
           if (state is FallAlert) {
             _showFallDialog(context, state);
+          } else if (state is ActivityTracking) {
+            final current = state.current.type;
+            if (current == UserActivityType.unknown) return;
+            _activityTypeCounts[current] =
+                (_activityTypeCounts[current] ?? 0) + 1;
           }
         },
+
         child: BlocBuilder<ActivityBloc, ActivityBlocState>(
           builder: (context, state) {
-            // Rastrear tipo de actividad en tiempo real
-            if (state is ActivityTracking) {
-              switch (state.current.type) {
-                case UserActivityType.walking:
-                  _currentActivityType = 'walking';
-                  break;
-                case UserActivityType.running:
-                  _currentActivityType = 'running';
-                  break;
-                case UserActivityType.stationary:
-                  if (_currentActivityType == 'stationary') {
-                    _currentActivityType = 'stationary';
-                  }
-                  break;
-                default:
-                  break;
-              }
-            }
+
+            final isTracking = state is ActivityTracking;
+
+            final activityType = isTracking
+                ? state.current.type
+                : UserActivityType.unknown;
 
             return Column(
               children: [
@@ -226,147 +159,79 @@ class _ActivityPageState extends State<ActivityPage> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color:
-                                  const Color(0xFFFF6B35).withOpacity(0.15),
-                              width: 2,
+                              color: const Color(0xFFFF6B35).withOpacity(0.15),
                             ),
                           ),
-                          child: Center(
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 400),
-                              width: 160,
-                              height: 160,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: state is ActivityTracking
-                                    ? const Color(0xFFFF6B35).withOpacity(0.15)
-                                    : const Color(0xFF1A1A1A),
-                                border: Border.all(
-                                  color: state is ActivityTracking
-                                      ? const Color(0xFFFF6B35)
-                                      : const Color(0xFF2A2A2A),
-                                  width: 2,
-                                ),
-                              ),
-                              child: Icon(
-                                _getIcon(state),
-                                size: 72,
-                                color: state is ActivityTracking
-                                    ? const Color(0xFFFF6B35)
-                                    : const Color(0xFF4A4A4A),
-                              ),
-                            ),
+                          child: Icon(
+                            _getIcon(activityType),
+                            size: 90,
+                            color: isTracking
+                                ? const Color(0xFFFF6B35)
+                                : Colors.grey,
                           ),
                         ),
-                        const SizedBox(height: 32),
+
+                        const SizedBox(height: 20),
+
                         Text(
-                          _getLabel(state),
+                          _getLabel(activityType),
                           style: const TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 28,
                             color: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 8),
+
+                        const SizedBox(height: 10),
+
                         Text(
-                          state is ActivityTracking
-                              ? 'Sesión activa'
-                              : 'Listo para iniciar',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF6B6B6B),
-                          ),
+                          isTracking ? 'Sesión activa' : 'Listo para iniciar',
+                          style: const TextStyle(color: Colors.grey),
                         ),
-                        if (state is ActivityTracking) ...[
-                          const SizedBox(height: 16),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF1A1A1A),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                  color: const Color(0xFF2A2A2A)),
-                            ),
-                            child: Text(
-                              'Tipo: ${_typeLabel(_currentActivityType)}',
-                              style: const TextStyle(
-                                color: Color(0xFFFF6B35),
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
                       ],
                     ),
                   ),
                 ),
+
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(32, 0, 32, 48),
+                  padding: const EdgeInsets.all(24),
                   child: GestureDetector(
                     onTap: () async {
-                      if (state is ActivityTracking) {
-                        await _saveSessionRecord();
-                        if (context.mounted) {
-                          context
-                              .read<ActivityBloc>()
-                              .add(ActivityStopped());
+                      final blocState = context.read<ActivityBloc>().state;
+                      if (blocState is ActivityTracking) {
+                        await _saveSession(blocState.current);
+
+                        context.read<ActivityBloc>().add(ActivityStopped());
+
+                        if (mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: const Text(
-                                  'Sesión guardada en historial'),
-                              backgroundColor: const Color(0xFFFF6B35),
-                              behavior: SnackBarBehavior.floating,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                            const SnackBar(
+                              content: Text('Sesión guardada'),
+                              backgroundColor: Color(0xFFFF6B35),
                             ),
                           );
                         }
                       } else {
-                        await _requestPermissionsAndStart();
+                        _requestPermissionsAndStart();
                       }
                     },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      width: double.infinity,
-                      height: 64,
+                    child: Container(
+                      height: 60,
                       decoration: BoxDecoration(
-                        color: state is ActivityTracking
-                            ? const Color(0xFF2A2A2A)
+                        color: isTracking
+                            ? Colors.red
                             : const Color(0xFFFF6B35),
-                        borderRadius: BorderRadius.circular(20),
-                        border: state is ActivityTracking
-                            ? Border.all(color: Colors.red, width: 1.5)
-                            : null,
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            state is ActivityTracking
-                                ? Icons.stop_rounded
-                                : Icons.play_arrow_rounded,
-                            color: state is ActivityTracking
-                                ? Colors.red
-                                : Colors.white,
-                            size: 28,
+                      child: Center(
+                        child: Text(
+                          isTracking ? 'DETENER' : 'INICIAR',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(width: 10),
-                          Text(
-                            state is ActivityTracking
-                                ? 'Detener sesión'
-                                : 'Iniciar sesión',
-                            style: TextStyle(
-                              color: state is ActivityTracking
-                                  ? Colors.red
-                                  : Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -379,35 +244,41 @@ class _ActivityPageState extends State<ActivityPage> {
     );
   }
 
-  IconData _getIcon(ActivityBlocState state) {
-    if (state is ActivityTracking) {
-      switch (state.current.type) {
-        case UserActivityType.walking:
-          return Icons.directions_walk;
-        case UserActivityType.running:
-          return Icons.directions_run;
-        case UserActivityType.stationary:
-          return Icons.accessibility_new;
-        case UserActivityType.unknown:
-          return Icons.help_outline;
-      }
-    }
-    return Icons.fitness_center;
-  }
-
-  String _getLabel(ActivityBlocState state) {
-    if (state is ActivityTracking) return state.current.label;
-    return 'Presiona Iniciar';
-  }
-
-  String _typeLabel(String type) {
+  IconData _getIcon(UserActivityType type) {
     switch (type) {
-      case 'running':
-        return 'Corriendo';
-      case 'walking':
-        return 'Caminando';
+      case UserActivityType.running:
+        return Icons.directions_run;
+      case UserActivityType.walking:
+        return Icons.directions_walk;
+      case UserActivityType.stationary:
+        return Icons.accessibility_new;
       default:
-        return 'Estacionario';
+        return Icons.fitness_center;
     }
+  }
+
+  String _getLabel(UserActivityType type) {
+    switch (type) {
+      case UserActivityType.running:
+        return 'Corriendo';
+      case UserActivityType.walking:
+        return 'Caminando';
+      case UserActivityType.stationary:
+        return 'Estacionario';
+      default:
+        return 'Esperando...';
+    }
+  }
+
+  UserActivityType? _dominantType() {
+    UserActivityType? best;
+    int bestCount = 0;
+    _activityTypeCounts.forEach((type, count) {
+      if (type != UserActivityType.unknown && count > bestCount) {
+        best = type;
+        bestCount = count;
+      }
+    });
+    return best;
   }
 }
